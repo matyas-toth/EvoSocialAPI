@@ -8,5 +8,12 @@
             return DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         }
 
+        public static long Unix(DateTime date)
+        {
+            DateTimeOffset offset = new DateTimeOffset(date);
+            return offset.ToUnixTimeSeconds();
+
+        }
+
     }
 }

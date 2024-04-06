@@ -1,5 +1,6 @@
 ﻿using EvoSocialAPI.Core.Account;
 using EvoSocialAPI.Core.Responses;
+using EvoSocialAPI.Core.Session;
 using EvoSocialAPI.Core.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,16 +24,28 @@ namespace EvoSocialAPI.Controllers
         [HttpGet(Name = "Login")]
         public LoginResponse Get(string username, string password)
         {
-            AccountIdentifier acc = AccountUtils.GetAccount(username, password);
+            AccountIdentifier account = AccountUtils.GetAccount(username, password);
 
             string response = "";
+            bool error = false;
 
-            if(!acc.IsValid())
+            if(!account.IsValid())
             {
                 response = "invalid-account";
+                error = true;
             }
 
-            return new LoginResponse { Token = acc.GetToken(), Error = !acc.IsValid(), Response = response, SessionID = "" };
+            Session session = new Session(account);
+            SessionIdentifier sessionID = session.Start();
+
+            if(!sessionID.IsValid())
+            {
+                response = "invalid-account";
+                error = true;
+            }
+
+
+            return new LoginResponse { Error = error, Response = response, SessionID = sessionID.GetSessionID() };
         }
 
     }
