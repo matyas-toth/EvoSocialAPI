@@ -6,10 +6,10 @@ namespace EvoSocialAPI.Core.Database
     {
 
         private MySqlConnection connection;
-        private string host = "212.90.120.213";
-        private string db = "evoweb";
-        private string username = "evowebuser";
-        private string password = "evowebpassword";
+        private string host = "-";
+        private string db = "-";
+        private string username = "-";
+        private string password = "-";
 
         public EvoWebDatabase()
         {

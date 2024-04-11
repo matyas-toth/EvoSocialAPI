@@ -1,6 +1,7 @@
 ﻿using EvoSocialAPI.Core.Exceptions;
 using EvoSocialAPI.Core.Register;
 using EvoSocialAPI.Core.Responses;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace EvoSocialAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [EnableCors("AllowSpecificIP")]
     public class RegisterController : ControllerBase
     {
 
